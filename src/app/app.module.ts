@@ -10,6 +10,7 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 // 1 -> import something from Angular Material part 2 bellow
 import { MatInputModule } from "@angular/material/input";
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MatCardModule} from '@angular/material/card';
 
     // 2 -> import something from Angular Material
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
 
