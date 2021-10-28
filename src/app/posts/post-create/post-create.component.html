@@ -1,0 +1,19 @@
+<h2>Post create component</h2>
+
+<!-- textarea is an input element in HTML -->
+
+
+<mat-card>
+    <mat-form-field>
+        <textarea matInput rows="6" [(ngModel)]="enteredValue"></textarea>
+    </mat-form-field>
+</mat-card>
+
+
+<hr>
+
+<!-- This is event binding -->
+<button (click)="onAddPost()">save post</button>
+
+<!-- String interpolation -->
+<p>{{newPost}}</p>

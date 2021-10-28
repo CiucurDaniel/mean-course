@@ -8,5 +8,7 @@ if (environment.production) {
   enableProdMode();
 }
 
+
+// we tell Angular to start this application with this module in mind (AppModulle)
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
