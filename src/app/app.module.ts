@@ -11,13 +11,16 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { MatInputModule } from "@angular/material/input";
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     //those here are only available to use inside our root component in our app
     AppComponent,
-    PostCreateComponent
+    PostCreateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,8 @@ import {MatButtonModule} from '@angular/material/button';
     // 2 -> import something from Angular Material
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
 
