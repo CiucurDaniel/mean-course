@@ -13,7 +13,7 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   getPosts() {
-    this.http.get<{message: string, posts: PostModel[]}>('http://localhost/3000/api/posts')
+    this.http.get<{message: string, posts: PostModel[]}>('http://localhost:3000/api/posts')
       .subscribe( (postData) => {
         this.posts = postData.posts;
         this.postsUpdated.next([...this.posts]);

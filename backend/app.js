@@ -2,6 +2,31 @@ const express = require('express');
 
 const app = express();
 
+/*
+No path set here because we want this to do this for all incoming requests
+ */
+app.use( (req, res, next) => {
+
+  // this refers to which domains can access our API
+  res.setHeader("Access-Control-Allow-Origin", '*');
+
+  // allow some extra headers
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+
+  // control which http verbs can send requests
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+    );
+
+  // next means simply want to forward the request to the other middlewares we have
+  next();
+});
+
+
 app.use('/api/posts', (req, res, next) => {
   const posts = [
     {id: "1223f",
