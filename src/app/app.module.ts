@@ -15,6 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {PostService} from "./posts/post.service";
 
 
 @NgModule({
@@ -38,6 +39,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatToolbarModule,
     MatExpansionModule
   ],
+
+  // this is for services
+  //providers: [PostService],
+  // either add services here or with @Injectable({}) on
   providers: [],
 
   // this is made available to index.html

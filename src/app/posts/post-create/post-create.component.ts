@@ -1,30 +1,25 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import {Component} from "@angular/core";
 
-import {PostModel} from "../post.model";
 import {NgForm} from "@angular/forms";
+import {PostService} from "../post.service";
 
 @Component({
-    selector: 'app-post-create',
-    templateUrl: './post-create.component.html',
-    styleUrls: ['./post-create.component.css']
+  selector: 'app-post-create',
+  templateUrl: './post-create.component.html',
+  styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent {
 
-    enteredTitle = '';
-    enteredContent = '';
+  enteredTitle = '';
+  enteredContent = '';
 
-    // this decorator turns this Event into one which we can listen from outside
-    @Output() postCreated = new EventEmitter<PostModel>();
+  constructor(public postService: PostService) {}
 
-    onAddPost(form: NgForm): void {
-      if(form.invalid){
-        return;
-      }
-        const post: PostModel = {
-            title: form.value.title,
-            content: form.value.content
-        };
-
-        this.postCreated.emit(post);
+  onAddPost(form: NgForm): void {
+    if (form.invalid) {
+      return;
     }
+
+    this.postService.addPost(form.value.title, form.value.content);
+  }
 }
