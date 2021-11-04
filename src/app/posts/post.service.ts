@@ -28,10 +28,15 @@ export class PostService {
 
   addPost(title: string, content: string): void {
     const post: PostModel = {id: null, title: title, content: content};
-    this.posts.push(post);
 
-    // emit a values of my posts after I updated them, next I need to listen to it
-    this.postsUpdated.next([...this.posts]);
+    this.http.post<{message: string}>("http://localhost:3000/api/posts", post)
+      .subscribe(responseData => {
+        console.log(responseData.message);
+        this.posts.push(post);
+
+        // emit a values of my posts after I updated them
+        this.postsUpdated.next([...this.posts]);
+      })
   }
 }
 
