@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 
+import {PostModel} from "../post.model";
+
 @Component({
     selector: 'app-post-create',
     templateUrl: './post-create.component.html',
@@ -11,11 +13,11 @@ export class PostCreateComponent {
     enteredContent = '';
 
     // this decorator turns this Event into one which we can listen from outside
-    @Output() postCreated = new EventEmitter();
+    @Output() postCreated = new EventEmitter<PostModel>();
 
     onAddPost(): void {
-        const post = {
-            title: this.enteredTitle, 
+        const post: PostModel = {
+            title: this.enteredTitle,
             content: this.enteredContent
         };
 
