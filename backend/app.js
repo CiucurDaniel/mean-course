@@ -55,14 +55,17 @@ app.post('/api/posts', (req, res, next) => {
 app.get('/api/posts', (req, res, next) => {
   Post.find()
     .then(documents => {
-      console.log(documents);
+      res.status(200).json({
+        message: 'Posts fetched successfully',
+        posts: documents
+      });
     });
-  res.status(200).json({
-    message: 'Posts fetched successfully',
-    posts: posts
-  });
 });
 
+app.delete('/api/posts/:id', (req, res, next) => {
+  console.log(req.params.id);
+  res.status(200).json({message: "Post deleted"});
+})
 
 // export my app, the Node.Js way, simple export doesn't work here
 module.exports = app;
