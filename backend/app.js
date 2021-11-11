@@ -1,11 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Post = require('./models/post')
 
 const app = express();
 
+mongoose.connect("mongodb+srv://user1:QGKzQUolzIxHxCRe@clustermeancourse.be6yd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+  .then( () => console.log("Connected to the database!"))
+  .catch( () => console.log("Connection failed!"));
 
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended: false}));
 
 /*
 No path set here because we want this to do this for all incoming requests
@@ -32,8 +38,14 @@ app.use( (req, res, next) => {
 });
 
 app.post('/api/posts', (req, res, next) => {
-  const post = req.body;
-  console.log();
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
+  });
+
+  // mongoose does the work in the background
+  post.save();
+
   res.status(201).json({
     message: 'Post successfully added.'
   });
@@ -41,27 +53,16 @@ app.post('/api/posts', (req, res, next) => {
 
 
 app.get('/api/posts', (req, res, next) => {
-  const posts = [
-    {id: "1223f",
-    title: "Post 1",
-    content: "This is my content"
-    },
-    {id: "1223f",
-    title: "Post 2",
-    content: "This is my awesome content"
-    },
-    {id: "1223f",
-    title: "Post 3",
-    content: "This is my content number 3."
-    },
-  ];
-
+  Post.find()
+    .then(documents => {
+      console.log(documents);
+    });
   res.status(200).json({
     message: 'Posts fetched successfully',
     posts: posts
   });
 });
 
-// export my app, the Node.Js way, simple export doesn't work here
 
+// export my app, the Node.Js way, simple export doesn't work here
 module.exports = app;
