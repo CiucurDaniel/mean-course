@@ -44,11 +44,15 @@ app.post('/api/posts', (req, res, next) => {
   });
 
   // mongoose does the work in the background
-  post.save();
-
-  res.status(201).json({
-    message: 'Post successfully added.'
+  // here we send as response the createdPost in order to give the client
+  // the postId
+  post.save().then( createdPost => {
+    res.status(201).json({
+      message: 'Post successfully added.',
+      postId: createdPost._id
+    });
   });
+
 });
 
 
