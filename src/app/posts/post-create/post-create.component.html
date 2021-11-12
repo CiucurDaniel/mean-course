@@ -5,12 +5,12 @@
   <form (submit)="onSavePost(postForm)" #postForm="ngForm">
 
     <mat-form-field>
-      <input matInput type="text" name="title" [ngModel]="post.title" required placeholder="Title" #title="ngModel">
+      <input matInput type="text" name="title" [ngModel]="post?.title" required placeholder="Title" #title="ngModel">
       <mat-error *ngIf="title.invalid">Please enter a post title.</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <textarea matInput rows="4" name="content" [ngModel]="post.content" required placeholder="Content" #content="ngModel"></textarea>
+      <textarea matInput rows="4" name="content" [ngModel]="post?.content" required placeholder="Content" #content="ngModel"></textarea>
       <mat-error *ngIf="content.invalid">Please enter some content for the post.</mat-error>
     </mat-form-field>
     <!-- This is event binding -->
