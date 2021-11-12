@@ -1,8 +1,10 @@
 <mat-toolbar color="primary">
     <span><a routerLink="/">My Application</a></span>
+  <span class="spacer"></span>
     <ul>
       <li>
-        <a routerLink="/create">New post</a>
+        <!-- routerLinkActive applies a style WHEN we are on the route's page and disables it when we leave the route -->
+        <a mat-button routerLink="/create" routerLinkActive="mat-accent">New post</a>
       </li>
     </ul>
 </mat-toolbar>
