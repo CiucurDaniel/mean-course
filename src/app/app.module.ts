@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PostService} from "./posts/post.service";
+import {AppRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import {PostService} from "./posts/post.service";
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     // i need this to get directive [(ngModel)]
     FormsModule,
     BrowserAnimationsModule,
