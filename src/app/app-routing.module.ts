@@ -11,7 +11,8 @@ Modules are what Angular analyses to see what features your app uses
 
 const routes: Routes = [
   {path: '', component: PostListComponent},
-  {path: 'create', component: PostCreateComponent}
+  {path: 'create', component: PostCreateComponent},
+  {path: 'edit/:postId', component: PostCreateComponent},
 ]
 
 @NgModule({

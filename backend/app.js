@@ -55,6 +55,20 @@ app.post('/api/posts', (req, res, next) => {
 
 });
 
+app.put('/api/posts/:id', (req , res, next) => {
+  const post = new Post({
+    _id: req.body.id,
+    title: req.body.title,
+    content: req.body.content
+  });
+
+
+  //Give the id of the post and what you want to replace it with, in our case a new Post object
+  Post.updateOne({_id: req.params.id}, post)
+    .then( result => {
+      res.status(200).json({message: 'Update successful'});
+    });
+});
 
 app.get('/api/posts', (req, res, next) => {
   Post.find()
@@ -73,6 +87,19 @@ app.delete('/api/posts/:id', (req, res, next) => {
       res.status(200).json({message: "Post deleted"});
     })
 });
+
+
+app.get('/api/posts/:id', (req, res, next) => {
+  Post.findById(req.params.id)
+    .then( post => {
+      if(post){
+        req.status(200).json(post);
+      } else {
+        res.status(404).json({message: 'Post not found!'});
+      }
+    });
+});
+
 
 // export my app, the Node.Js way, simple export doesn't work here
 module.exports = app;
