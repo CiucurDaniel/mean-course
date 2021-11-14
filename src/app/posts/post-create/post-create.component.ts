@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 
-import {NgForm} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PostService} from "../post.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {PostModel} from "../post.model";
@@ -19,27 +19,38 @@ export class PostCreateComponent implements OnInit {
   public post: PostModel;
   isLoading: boolean = false;
 
+  form: FormGroup;
+
   constructor(public postService: PostService, public route: ActivatedRoute) {
   }
 
-  onSavePost(form: NgForm): void {
-    if (form.invalid) {
+  onSavePost(): void {
+    if (this.form.invalid) {
       return;
     }
     this.isLoading = true;
     if (this.mode === 'create') {
-      this.postService.addPost(form.value.title, form.value.content);
+      this.postService.addPost(this.form.value.title, this.form.value.content);
     } else {
       this.postService.updatePost(
         this.postId,
-        form.value.title,
-        form.value.content
+        this.form.value.title,
+        this.form.value.content
       );
     }
-    form.resetForm();
+    this.form.reset();
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      'title': new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(3)]
+      }),
+      'content': new FormControl(null, {
+        validators: [Validators.required]
+      })
+    });
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('postId')) {
         // im in edit mode
@@ -51,9 +62,15 @@ export class PostCreateComponent implements OnInit {
         this.isLoading = true;
 
         //store the post
-        this.postService.getPost(this.postId).subscribe( postData => {
+        this.postService.getPost(this.postId).subscribe(postData => {
           this.isLoading = false;
-          this.post = {id: postData._id, title: postData.title, content: postData.content};
+          this.post = {id: postData._id, title: postData.title, content: postData.content
+          };
+
+          // initialize the values of the form in case we got a loaded post
+          this.form.setValue({
+            'title': this.post.title, 'content': this.post.content
+          });
         });
       } else {
         this.mode = 'create';

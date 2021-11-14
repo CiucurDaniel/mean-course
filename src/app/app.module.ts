@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
@@ -32,7 +32,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     BrowserModule,
     AppRoutingModule,
     // i need this to get directive [(ngModel)]
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
 
     // 2 -> import something from Angular Material
